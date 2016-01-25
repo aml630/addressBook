@@ -1,5 +1,5 @@
 var tasks = [""];
-var doneTasks = [];
+var doneTasks = [""];
 
 function toDoList(task) {
   this.task = task;
@@ -21,39 +21,48 @@ toDoList.prototype.moveTask = function(task) {
 toDoList.prototype.moveBack = function(task) {
   var index = doneTasks.indexOf(task);
   var removedItem = doneTasks.splice(index, index);
-  removedItem = removedItem.join("")
+  removedItem = removedItem.join("");
   tasks.push(removedItem);
   return removedItem;
 };
 
 
 toDoList.prototype.listTask = function(task) {
-  var example = new toDoList(task)
-  var newTasks = example.newTask(task)
+  var example = new toDoList(task);
+  var newTasks = example.newTask(task);
   var text = "";
   for(var i = 1; i<=newTasks.length; i++){
     text += task;
-    console.log(text)
     return text;
   };
 };
+
+
+
 
 $(document).ready(function() {
   $("form").submit(function (event) {
     var inputTask = $("input").val();
     var toDo = new toDoList(inputTask);
     $(".uncompleted").append("<li class='click'>" + toDo.listTask(inputTask) + "</li>");
-
     $(".click").last().click(function () {
-          $(".completed").append("<li class='click2'>" + toDo.moveTask(inputTask) + "</li>");
-          $(this).hide();
+      $(".completed").append("<li class='click2'>" + toDo.moveTask(inputTask) + "</li>");
+      $(this).hide().removeClass('click2');
+
+      $(".click2").last().click(function () {
+        $(".uncompleted").append("<li class='click'>" + toDo.moveBack(inputTask) + "</li>");
+        $(this).hide().removeClass('click');
+      });
     });
 
-    $(".click2").last().click(function () {
-          $(".completed").append("<li class='click'>" + toDo.moveBack(inputTask) + "</li>");
-          $(this).hide();
-    });
+
     event.preventDefault();
   });
-
 });
+
+// $(.completed).click
+// {
+//   //create event that fires when user clicks on task that is labelled "completed"
+//   //move to uncompleted
+//   //remove completed class
+// }

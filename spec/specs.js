@@ -8,6 +8,10 @@ describe("toDoList", function () {
   });
 
   it("will move one item from tasks array to doneTasks array", function() {
-    expect(firstItem.moveTask("Clean")).to.eql("Clean");
+    expect(firstItem.moveTask("Clean")).to.equal("Clean");
+  });
+
+  it("will move one item from doneTasks array to tasks array", function() {
+    expect(firstItem.moveBack("Clean")).to.equal("Clean");
   });
 });
