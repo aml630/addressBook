@@ -6,3 +6,11 @@
 .lastNameSpan {
   display: none;
 }
+
+.click {
+  color: red;
+}
+
+.click2 {
+  color:blue;
+}
