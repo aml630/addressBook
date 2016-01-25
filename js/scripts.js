@@ -9,8 +9,11 @@ Slimeball.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
 
-console.log(Slimeball)
+Slimeball.prototype.isAge = function() {
+  return this.fullName() + " is " + this.age + " years old";
+}
+
 $(document).ready(function() {
 
 
-})
+});
